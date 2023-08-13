@@ -1,0 +1,17 @@
+.headcontainer {
+    max-width: 1600px;
+    max-height: 100px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    background-color: #2b2727;
+    color: #fff;
+    padding: 10px 0;
+  }
+
+  .headcontainer img{
+    margin-left: 35px;
+    margin-top: 0px;
+  }
+  
+  
