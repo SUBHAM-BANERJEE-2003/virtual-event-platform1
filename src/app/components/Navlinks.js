@@ -36,7 +36,7 @@ const Navlinks = () => {
             </Link>
         </li>
         <li className={styles.li}>
-            <button className={styles.button}>Sign Up</button>
+            <Link href="/signup"><button className={styles.button}>Sign Up</button></Link>
         </li>
         </ul>
         </div>
