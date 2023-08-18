@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React,{useState} from 'react';
 import styles from '@/app/styles/signup.module.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -7,21 +8,40 @@ import {
   faUser
 } from "@fortawesome/free-solid-svg-icons";
 const RegistrationForm = () => {
+  const [user,setUser] = useState(null);
+  const[email,setEmail] = useState("")
+  const handleSubmit = async(event) => {
+    event.preventDefault();
+    const response = await fetch('http://127.0.0.1:8000/api/signup', {
+      method: 'POST',
+      body: JSON.stringify({
+        email
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      response=>console.log('response',response)
+      }).catch(error=>console.log('error: ', error))
+  }
   return (
     <div className={styles.form_wrapper}>
       <div className={styles.form_container}>
         <div className={styles.title_container}>
+          {user && <p>User created: {user.email}</p>}
           <h2>REGISTER FOR OUR WEBSITE</h2>
         </div>
         <div className={`${styles.clearfix} ${styles.row}`}>
           <div className="">
-            <form>
+            <form onSubmit={handleSubmit}>
               <label><span className={styles.importants}>*</span>Email Id:</label>
               <div className={styles.input_field}>
                 <div>
                   <FontAwesomeIcon icon={faEnvelope}/>
                 </div>
-                <input className={styles.inputtypes}type="email" name="email" placeholder="Email" required />
+                <input className={styles.inputtypes}type="email" name="email" value={email} placeholder="Email" onChange={(event)=>{setEmail(event.target.value)}} required/>
               </div>
               <label><span className={styles.importants}>*</span>Password:</label>
               <div className={styles.input_field}>
